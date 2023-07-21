@@ -3,4 +3,4 @@
 
 ## 🌟 Menu Principal 🌟
 1. 📖 Introdução - informações importante para um bom andamento do curso.
-2. 🐋 [Docker](./02%20%7C%20Docker%20%F0%9F%90%B3//README.md) - Como criar e administrar ambientes isolados através de containers com o Docker.
+2. 🐋 [Docker](./02%20%7C%20Docker%20%F0%9F%90%8B/README.md) - Como criar e administrar ambientes isolados através de containers com o Docker.
