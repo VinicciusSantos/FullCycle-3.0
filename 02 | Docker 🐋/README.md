@@ -40,6 +40,7 @@
 - `docker rmi :nome_da_imagem`: apaga uma imagem
 - `docker build :pasta`: cria uma imagem a partir de um dockerfile
   - `-t :usuario/:nome_imagem:latest`: dá uma tag para uma imagem
+  - `-f :nome_do_arquivo`: passa um arquivo Dockerfile
 
 ## Dockerfile
 Uma receita para construir um container, permitindo definir um ambiente personalizado e próprio para um projeto
