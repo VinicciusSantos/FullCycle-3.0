@@ -1,4 +1,6 @@
-# Comandos docker
+# Docker 🐳
+
+# Principais comandos
 
 - `docker ps`: lista todos os containers
     - `-a`: mostra containers que já foram encerrados
