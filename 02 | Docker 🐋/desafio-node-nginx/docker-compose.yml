@@ -1,0 +1,43 @@
+version: '3.0'
+
+services:
+  server:
+    build:
+      context: ./server
+    container_name: server
+    entrypoint: wait-for db:3306 -t 40 -- ./start.sh
+    tty: true
+    volumes:
+      - ./server:/usr/src/app
+    networks:
+      - appnetwork
+    depends_on:
+      - db
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    networks:
+      - appnetwork
+    ports:
+      - 8080:80
+    depends_on: 
+    - server
+
+  db:
+    image: mysql
+    command: --innodb-use-native-aio=0  --default-authentication-plugin=mysql_native_password
+    container_name: db
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=password
+    networks:
+      - appnetwork
+
+networks:
+  appnetwork:
+    driver: bridge
