@@ -10,4 +10,6 @@
 ## 🌟 Menu Principal 🌟
 1. 📖 Introdução - informações importante para um bom andamento do curso.
 2. 🐋 [Docker](./02%20%7C%20Docker%20%F0%9F%90%8B/README.md) - Como criar e administrar ambientes isolados através de containers com o Docker.
-3. 🏛️ [Fundamentos da arquitetura de software](./03%20|%20Fundamentos%20da%20arquitetura%20de%20software🏛️//README.md) - Performance, Escalabilidade e Resiliência são fundamentos essenciais para que um software seja construido da forma correta
+3. 🏛️ [Fundamentos da arquitetura de software](./03%20%7C%20Fundamentos%20da%20arquitetura%20de%20software%20%F0%9F%8F%9B%EF%B8%8F//README.md) - Performance, Escalabilidade e Resiliência são fundamentos essenciais para que um software seja construido da forma correta
+4. 🔄 [Comunicação entre sistemas](./04%20%7C%20Comunica%C3%A7%C3%A3o%20entre%20sistemas%20%F0%9F%94%84//README.md) - Performance, Escalabilidade e Resiliência são fundamentos essenciais para que um software seja construido da forma correta
+REST, gRPC, GraphQL. Como utilizar protocolos distintos na sua aplicação para que se comuniquem de forma inteligente entre elas e externamente.
