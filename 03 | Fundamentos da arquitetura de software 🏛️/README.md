@@ -1,6 +1,6 @@
 [⬅ voltar ao menu](../README.md)
 
-# Fundamentos da arquitetura de software🏛️
+# Fundamentos da arquitetura de software 🏛️
 
 ## Tipos de Arquitetura
 
