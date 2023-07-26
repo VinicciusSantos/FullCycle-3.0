@@ -54,6 +54,9 @@
 - Provê links relacionais para os recursos exemplificando o que pode ser feito
 
 ### Principais padrões de API REST
+- JSON
+- Hal
+- Siren
 
 #### JSON
 - Não provê um padrão de hipermídia para realizar a linkagem
@@ -61,4 +64,11 @@
 #### HAL (Hypermedia Application Language)
 ![Hall Pattern](./assets/hall.png)
 
-#### Siren
+### HTTP Method Negotiation 
+- O Método options informa quais metodos são permitidos para um recurso
+
+### HTTP Content Negotiation
+- Cliente solicita a informação e eo tipo de retorno pelo server baseado no media type informado por ordem de prioridade
+  - Erro 406: Not Acceptable 
+- Através do content-type no header da request, o servidor consegue verificar se ele irá conseguir processar a informação para retornar a informação desejada
+  - Erro 415: Unsupported Media Type 
