@@ -72,3 +72,5 @@
   - Erro 406: Not Acceptable 
 - Através do content-type no header da request, o servidor consegue verificar se ele irá conseguir processar a informação para retornar a informação desejada
   - Erro 415: Unsupported Media Type 
+
+## GraphQL 
