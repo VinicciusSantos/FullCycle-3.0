@@ -1,0 +1,9 @@
+version: '3'
+services:
+  golang-dev:
+    build: .
+    container_name: golang-dev
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    tty: true
