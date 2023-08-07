@@ -74,3 +74,31 @@
   - Erro 415: Unsupported Media Type 
 
 ## GraphQL 
+- É uma linguagem de consulta para APIs, desenvolvida pelo Facebook, que permite aos clientes requisitar apenas os dados necessários e em formato específico.
+- Em vez de ter múltiplas requisições REST para diferentes endpoints, o GraphQL utiliza um único endpoint. Os clientes especificam os campos e suas relações na query, obtendo exatamente o que precisam.
+
+### Tipos de Dados:
+  - Query: Define as operações de leitura. É o ponto de entrada para buscar informações.
+  - Mutation: Utilizado para operações de escrita, como criação, atualização e exclusão de dados.
+  - Subscription: Permite que os clientes recebam atualizações em tempo real quando os dados mudam.
+
+### Campos e Resolvers:
+  Os tipos de dados definidos em um schema GraphQL possuem campos que podem ser consultados. Cada campo tem um resolver, que define como os dados são buscados e retornados.
+
+### Schema:
+  O schema define os tipos de dados disponíveis e suas relações. Ele atua como um contrato entre o servidor e o cliente, especificando como as queries podem ser feitas.
+
+### Vantagens:
+  - Redução de over-fetching (buscar mais dados do que necessário) e under-fetching (não obter dados suficientes).
+  - Flexibilidade para os clientes escolherem os campos necessários.
+  - Possibilidade de consolidar múltiplas requisições em uma única query.
+  - Evolução do schema sem quebrar os clientes existentes.
+
+### Comparação com REST:
+  - REST tem endpoints fixos para recursos específicos.
+  - GraphQL tem um único endpoint e permite que os clientes definam a estrutura da resposta.
+  - REST pode levar a over-fetching e under-fetching.
+  - GraphQL oferece maior controle sobre os dados buscados.
+
+### Ferramentas e Bibliotecas:
+  Existem diversas ferramentas e bibliotecas para trabalhar com GraphQL, como Apollo Server, Relay, GraphQL Yoga, entre outras.
