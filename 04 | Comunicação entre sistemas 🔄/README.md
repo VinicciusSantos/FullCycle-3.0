@@ -152,7 +152,44 @@ Existem diversas ferramentas e bibliotecas para trabalhar com GraphQL, como Apol
 - REST usa requisições HTTP com métodos (GET, POST, etc.).
 - gRPC usa chamadas RPC para comunicação eficiente e flexível.
 - gRPC possui tipagem forte e estrutura de mensagens definidas.
-  
+
 ### Ferramentas e Bibliotecas:
 
 Existem bibliotecas gRPC para várias linguagens de programação, como gRPC-Java, gRPC-Go, gRPC-Python, entre outras.
+
+## Service Discovery com Consul
+
+- Service Discovery é um padrão arquitetural que facilita a localização dinâmica de serviços em um ambiente distribuído. Ele permite que os serviços se registrem e descubram uns aos outros, facilitando a comunicação em um sistema distribuído.
+
+### Consul
+
+- É uma ferramenta de Service Discovery e configuração distribuída desenvolvida pela HashiCorp. Ele oferece uma plataforma completa para descoberta de serviços, monitoramento de saúde, gerenciamento de configurações e balanceamento de carga.
+
+#### Funcionalidades do Consul:
+
+- Service Registration: Os serviços se registram no Consul, informando seus detalhes como nome, endereço IP, porta e tags.
+- Service Discovery: Os clientes podem consultar o Consul para descobrir a localização dos serviços com base em seus nomes e tags.
+- Health Checking: O Consul monitora a saúde dos serviços e remove automaticamente aqueles que não estão funcionando corretamente.
+- Key-Value Store: Além do Service Discovery, o Consul oferece um mecanismo para armazenamento de configurações em um Key-Value Store distribuído.
+- Secure Service Communication: O Consul suporta comunicação segura entre serviços através de TLS.
+
+#### Arquitetura do Consul:
+
+O Consul é composto por três componentes principais:
+
+- Server Nodes: Mantêm o estado do cluster e gerenciam os registros de serviço, configurações e outras informações.
+- Client Nodes: Encaminham as consultas de descoberta e verificam a saúde dos serviços. Eles não mantêm o estado do cluster.
+- Datacenter: Um grupo lógico de nós Consul que compartilham informações e formam um cluster.
+
+#### Service Discovery com Consul:
+
+1. Os serviços se registram no Consul, especificando seu nome, endereço e portas.
+2. Os clientes consultam o Consul para obter informações sobre os serviços, usando seu nome ou tags.
+3. O Consul retorna os endereços IP e portas dos serviços disponíveis, permitindo a comunicação direta.
+
+#### Vantagens do Consul:
+
+- Facilita a localização dinâmica de serviços em um ambiente distribuído.
+- Automatiza o processo de registro, descoberta e monitoramento de serviços.
+- Suporta múltiplos datacenters, tornando-o escalável para ambientes complexos.
+- Integração com outras ferramentas HashiCorp, como Vault e Nomad.
