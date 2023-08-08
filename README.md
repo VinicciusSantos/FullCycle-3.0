@@ -12,3 +12,4 @@
 2. 🐋 [Docker](./02%20%7C%20Docker%20%F0%9F%90%8B/README.md) - Como criar e administrar ambientes isolados através de containers com o Docker.
 3. 🏛️ [Fundamentos da arquitetura de software](./03%20%7C%20Fundamentos%20da%20arquitetura%20de%20software%20%F0%9F%8F%9B%EF%B8%8F//README.md) - Performance, Escalabilidade e Resiliência são fundamentos essenciais para que um software seja construido da forma correta
 4. 🔄 [Comunicação entre sistemas](./04%20%7C%20Comunica%C3%A7%C3%A3o%20entre%20sistemas%20%F0%9F%94%84//README.md) - REST, gRPC, GraphQL. Como utilizar protocolos distintos na sua aplicação para que se comuniquem de forma inteligente entre elas e externamente.
+5. 🧱 [SOLID](./05%20%7C%20SOLID%20%F0%9F%A7%B1/README.md) - Existem cinco princípios de design que todo desenvolvedor precisa seguir para criar bons códigos. O SOLID Express tratá de cada um desses princípios e como utilizá-los.
