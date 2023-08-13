@@ -17,3 +17,4 @@
 4. 🔄 [Comunicação entre sistemas](./04%20%7C%20Comunica%C3%A7%C3%A3o%20entre%20sistemas%20%F0%9F%94%84//README.md) - REST, gRPC, GraphQL. Como utilizar protocolos distintos na sua aplicação para que se comuniquem de forma inteligente entre elas e externamente.
 5. 🧱 [SOLID](./05%20%7C%20SOLID%20%F0%9F%A7%B1/README.md) - Existem cinco princípios de design que todo desenvolvedor precisa seguir para criar bons códigos. O SOLID Express tratá de cada um desses princípios e como utilizá-los.
 6. 🧩 [Domain Driven Design](./06%20%7C%20Domain%20Driven%20Design%20%F0%9F%A7%A9/README.md) - Domain Driven Design (DDD) é um conceito capaz de mudar a forma que você projeta e constrói software.
+7. 🔍[DDD: Modelagem Tática e Patterns](./07%20|%20DDD:%20Modelagem%20Tática%20e%20Patterns%20🔍//README.md) 
