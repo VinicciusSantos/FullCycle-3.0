@@ -3,9 +3,15 @@ import Customer from "../../../../domain/customer/entity/customer";
 import Address from "../../../../domain/customer/value-object/address";
 import CustomerModel from "./customer.model";
 import CustomerRepository from "./customer.repository";
+import EventDispatcher from "../../../../domain/@shared/event/event-dispatcher";
+import EventDispatcherInterface from "../../../../domain/@shared/event/event-dispatcher.interface";
+import CustomerCreatedHandler1 from "../../../../domain/product/event/handler/log1-when-customer-created";
+import CustomerCreatedHandler2 from "../../../../domain/product/event/handler/log2-when-customer-created";
 
 describe("Customer repository test", () => {
+  const eventDispatcher: EventDispatcherInterface = new EventDispatcher();
   let sequelize: Sequelize;
+  let customerRepository: CustomerRepository;
 
   beforeEach(async () => {
     sequelize = new Sequelize({
@@ -17,6 +23,8 @@ describe("Customer repository test", () => {
 
     await sequelize.addModels([CustomerModel]);
     await sequelize.sync();
+
+    customerRepository = new CustomerRepository(eventDispatcher);
   });
 
   afterEach(async () => {
@@ -24,7 +32,6 @@ describe("Customer repository test", () => {
   });
 
   it("should create a customer", async () => {
-    const customerRepository = new CustomerRepository();
     const customer = new Customer("123", "Customer 1");
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer.Address = address;
@@ -44,8 +51,43 @@ describe("Customer repository test", () => {
     });
   });
 
+  it("should dispatch event when customer is created", async () => {
+    const handler1 = new CustomerCreatedHandler1();
+    const handler2 = new CustomerCreatedHandler2();
+    const handlerSpy1 = jest.spyOn(handler1, "handle");
+    const handlerSpy2 = jest.spyOn(handler2, "handle");
+    eventDispatcher.register("CustomerCreatedEvent", handler1);
+    eventDispatcher.register("CustomerCreatedEvent", handler2);
+
+    const customer = new Customer("123", "Customer 1");
+    const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
+    customer.Address = address;
+
+    const consoleSpy = jest.spyOn(console, "log");
+    await customerRepository.create(customer);
+
+    const expectedEvent = expect.objectContaining({
+      dataTimeOccurred: expect.any(Date),
+      eventData: customer,
+    });
+
+    expect(handlerSpy1).toBeCalledTimes(1);
+    expect(handlerSpy1).toBeCalledWith(expectedEvent);
+
+    expect(handlerSpy2).toBeCalledTimes(1);
+    expect(handlerSpy2).toBeCalledWith(expectedEvent);
+
+    expect(consoleSpy).toBeCalledWith(
+      "Esse é o primeiro console.log do evento: CustomerCreated",
+      expectedEvent
+    );
+    expect(consoleSpy).toBeCalledWith(
+      "Esse é o segundo console.log do evento: CustomerCreated",
+      expectedEvent
+    );
+  });
+
   it("should update a customer", async () => {
-    const customerRepository = new CustomerRepository();
     const customer = new Customer("123", "Customer 1");
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer.Address = address;
@@ -68,7 +110,6 @@ describe("Customer repository test", () => {
   });
 
   it("should find a customer", async () => {
-    const customerRepository = new CustomerRepository();
     const customer = new Customer("123", "Customer 1");
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer.Address = address;
@@ -80,15 +121,12 @@ describe("Customer repository test", () => {
   });
 
   it("should throw an error when customer is not found", async () => {
-    const customerRepository = new CustomerRepository();
-
     expect(async () => {
       await customerRepository.find("456ABC");
     }).rejects.toThrow("Customer not found");
   });
 
   it("should find all customers", async () => {
-    const customerRepository = new CustomerRepository();
     const customer1 = new Customer("123", "Customer 1");
     const address1 = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer1.Address = address1;

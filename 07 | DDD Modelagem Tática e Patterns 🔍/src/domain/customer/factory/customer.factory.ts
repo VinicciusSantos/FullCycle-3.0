@@ -5,11 +5,11 @@ import EventDispatcher from '../../@shared/event/event-dispatcher';
 
 export default class CustomerFactory {
   public static create(name: string): Customer {
-    return new Customer(uuid(), name, new EventDispatcher());
+    return new Customer(uuid(), name);
   }
 
   public static createWithAddress(name: string, address: Address): Customer {
-    const customer = new Customer(uuid(), name, new EventDispatcher());
+    const customer = new Customer(uuid(), name);
     customer.changeAddress(address);
     return customer;
   }

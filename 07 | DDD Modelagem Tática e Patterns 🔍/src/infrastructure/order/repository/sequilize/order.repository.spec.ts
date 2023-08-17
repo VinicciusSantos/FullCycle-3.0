@@ -11,9 +11,11 @@ import ProductRepository from "../../../product/repository/sequelize/product.rep
 import OrderItemModel from "./order-item.model";
 import OrderModel from "./order.model";
 import OrderRepository from "./order.repository";
+import EventDispatcher from "../../../../domain/@shared/event/event-dispatcher";
 
 describe("Order repository test", () => {
   let sequelize: Sequelize;
+  let customerRepository: CustomerRepository;
 
   beforeEach(async () => {
     sequelize = new Sequelize({
@@ -30,6 +32,9 @@ describe("Order repository test", () => {
       ProductModel,
     ]);
     await sequelize.sync();
+
+    const eventDispatcher = new EventDispatcher();
+    customerRepository = new CustomerRepository(eventDispatcher);
   });
 
   afterEach(async () => {
@@ -37,7 +42,6 @@ describe("Order repository test", () => {
   });
 
   it("should create a new order", async () => {
-    const customerRepository = new CustomerRepository();
     const customer = new Customer("123", "Customer 1");
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer.changeAddress(address);
@@ -83,7 +87,6 @@ describe("Order repository test", () => {
   });
 
   it("should update an order", async () => {
-    const customerRepository = new CustomerRepository();
     const customer = new Customer("123", "Customer 1");
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer.changeAddress(address);
@@ -153,7 +156,6 @@ describe("Order repository test", () => {
   });
 
   it("should find a order", async () => {
-    const customerRepository = new CustomerRepository();
     const customer = new Customer("123", "Customer 1");
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer.changeAddress(address);
@@ -181,7 +183,6 @@ describe("Order repository test", () => {
   });
 
   it("should find all orders", async () => {
-    const customerRepository = new CustomerRepository();
     const customer = new Customer("123", "Customer 1");
     const address = new Address("Street 1", 1, "ZipCode 1", "City 1");
     customer.changeAddress(address);

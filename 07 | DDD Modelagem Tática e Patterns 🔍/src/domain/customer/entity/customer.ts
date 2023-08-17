@@ -9,12 +9,10 @@ export default class Customer {
   private _active: boolean = false;
   private _rewardPoints: number = 0;
 
-  constructor(id: string, name: string, eventDispatcher: EventDispatcher) {
+  constructor(id: string, name: string) {
     this._id = id;
     this._name = name;
     this.validate();
-    const event = new CustomerCreatedEvent(this);
-    eventDispatcher.notify(event);
   }
 
   get id(): string {

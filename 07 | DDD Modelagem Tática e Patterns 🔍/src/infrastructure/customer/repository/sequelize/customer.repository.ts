@@ -2,8 +2,12 @@ import Customer from "../../../../domain/customer/entity/customer";
 import Address from "../../../../domain/customer/value-object/address";
 import CustomerRepositoryInterface from "../../../../domain/customer/repository/customer-repository.interface";
 import CustomerModel from "./customer.model";
+import EventDispatcherInterface from "../../../../domain/@shared/event/event-dispatcher.interface";
+import CustomerCreatedEvent from "../../../../domain/product/event/customer-created.event";
 
 export default class CustomerRepository implements CustomerRepositoryInterface {
+  constructor(private readonly eventDispatcher: EventDispatcherInterface) { }
+
   async create(entity: Customer): Promise<void> {
     await CustomerModel.create({
       id: entity.id,
@@ -15,6 +19,8 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
       active: entity.isActive(),
       rewardPoints: entity.rewardPoints,
     });
+    const event = new CustomerCreatedEvent(entity)
+    this.eventDispatcher.notify(event)
   }
 
   async update(entity: Customer): Promise<void> {
