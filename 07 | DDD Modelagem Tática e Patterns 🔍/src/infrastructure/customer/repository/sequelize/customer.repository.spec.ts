@@ -5,8 +5,8 @@ import CustomerModel from "./customer.model";
 import CustomerRepository from "./customer.repository";
 import EventDispatcher from "../../../../domain/@shared/event/event-dispatcher";
 import EventDispatcherInterface from "../../../../domain/@shared/event/event-dispatcher.interface";
-import CustomerCreatedHandler1 from "../../../../domain/product/event/handler/log1-when-customer-created";
-import CustomerCreatedHandler2 from "../../../../domain/product/event/handler/log2-when-customer-created";
+import CustomerCreatedHandler1 from "../../../../domain/product/event/handler/log1-when-customer-created.handler";
+import CustomerCreatedHandler2 from "../../../../domain/product/event/handler/log2-when-customer-created.handler";
 
 describe("Customer repository test", () => {
   const eventDispatcher: EventDispatcherInterface = new EventDispatcher();

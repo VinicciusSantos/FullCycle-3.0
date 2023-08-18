@@ -1,5 +1,7 @@
 import Address from "../value-object/address";
 import Customer from "./customer";
+import EventDispatcher from '../../@shared/event/event-dispatcher';
+import LogWhenCustomerAddressUpdated from "../../product/event/handler/log-when-customer-address-updated";
 
 describe("Customer unit tests", () => {
   it("should throw error when id is empty", () => {
@@ -59,5 +61,28 @@ describe("Customer unit tests", () => {
 
     customer.addRewardPoints(10);
     expect(customer.rewardPoints).toBe(20);
+  });
+
+  it('should dispatch event when address is changed', () => {
+    const eventDispatcher = new EventDispatcher();
+    const handler = new LogWhenCustomerAddressUpdated();
+    eventDispatcher.register('CustomerAdrressUpdatedEvent', handler);
+
+    const handlerSpy = jest.spyOn(handler, 'handle');
+    const consoleSpy = jest.spyOn(console, 'log');
+
+    const customer = new Customer("1", "Customer 1", eventDispatcher);
+    const address = new Address("Street 1", 123, "13330-250", "São Paulo");
+    customer.changeAddress(address);
+
+    const expectedEvent = expect.objectContaining({
+      dataTimeOccurred: expect.any(Date),
+      eventData: customer,
+    });
+
+    expect(handlerSpy).toBeCalledTimes(1);
+    expect(handlerSpy).toBeCalledWith(expectedEvent);
+    expect(consoleSpy).toBeCalledTimes(1);
+    expect(consoleSpy).toBeCalledWith(`O endereço do cliente ${customer.name} mudou para ${address.toString()}`);
   });
 });
