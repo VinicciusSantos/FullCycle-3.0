@@ -21,3 +21,4 @@
 6. 🧩 [Domain Driven Design](./06%20%7C%20Domain%20Driven%20Design%20%F0%9F%A7%A9/README.md) - Domain Driven Design (DDD) é um conceito capaz de mudar a forma que você projeta e constrói software.
 7. 🔍 [DDD: Modelagem Tática e Patterns](./07%20%7C%20DDD%20Modelagem%20T%C3%A1tica%20e%20Patterns%20%F0%9F%94%8D/README.md) - Como modelar um software utilizando DDD e como aplicar os principais patterns que est\u00e3o envolta do conceito de modelagem.
 8. 📅 [Event Storming na Prática](./08%20%7C%20Event%20Storming%20na%20Pr%C3%A1tica%20%F0%9F%93%85/README.md) - Envolva toda equipe de negócios e técnica, através de uma maneira colaborativa, prática e hands-on de apresentar todos os eventos do sistema.
+9. 🏗 [Arquitetura Hexagonal](./09%20%7C%20Arquitetura%20Hexagonal%20%F0%9F%8F%97/README.md) - Ports and Adapters. É possível organizar sua aplicação em camadas e responsabilidades.
