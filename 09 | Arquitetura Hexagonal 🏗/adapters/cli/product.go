@@ -2,7 +2,8 @@ package cli
 
 import (
 	"fmt"
-	"github.com/codeedu/go-hexagonal/application"
+
+	"github.com/VinicciusSantos/arquiteturaHexagonal/application"
 )
 
 func Run(service application.ProductServiceInterface, action string, productId string, productName string, price float64) (string, error) {

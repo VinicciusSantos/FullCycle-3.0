@@ -17,7 +17,8 @@ package cmd
 
 import (
 	"fmt"
-	server2 "github.com/codeedu/go-hexagonal/adapters/web/server"
+
+	server2 "github.com/VinicciusSantos/arquiteturaHexagonal/adapters/web/server"
 	"github.com/spf13/cobra"
 )
 

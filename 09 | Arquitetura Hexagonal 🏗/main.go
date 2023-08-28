@@ -1,6 +1,6 @@
 package main
 
-import "github.com/codeedu/go-hexagonal/cmd"
+import "github.com/VinicciusSantos/arquiteturaHexagonal/cmd"
 
 func main() {
 	cmd.Execute()

@@ -18,10 +18,11 @@ package cmd
 import (
 	"database/sql"
 	"fmt"
-	"github.com/codeedu/go-hexagonal/application"
 	"os"
+
+	dbInfra "github.com/VinicciusSantos/arquiteturaHexagonal/adapters/db"
+	"github.com/VinicciusSantos/arquiteturaHexagonal/application"
 	"github.com/spf13/cobra"
-	dbInfra "github.com/codeedu/go-hexagonal/adapters/db"
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"

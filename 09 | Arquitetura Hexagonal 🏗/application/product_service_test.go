@@ -1,11 +1,12 @@
 package application_test
 
 import (
-	"github.com/codeedu/go-hexagonal/application"
-	mock_application "github.com/codeedu/go-hexagonal/application/mocks"
+	"testing"
+
+	"github.com/VinicciusSantos/arquiteturaHexagonal/application"
+	mock_application "github.com/VinicciusSantos/arquiteturaHexagonal/application/mocks"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func TestProductService_Get(t *testing.T) {

@@ -1,4 +1,4 @@
-module github.com/codeedu/go-hexagonal
+module github.com/VinicciusSantos/arquiteturaHexagonal
 
 go 1.16
 
