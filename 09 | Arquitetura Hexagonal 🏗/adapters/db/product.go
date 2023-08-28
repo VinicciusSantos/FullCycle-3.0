@@ -3,8 +3,8 @@ package db
 import (
 	"database/sql"
 
+	"github.com/codeedu/go-hexagonal/application"
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/vinicciussantos/arquitetura-hexagonal/application"
 )
 
 type ProductDb struct {
@@ -15,13 +15,13 @@ func NewProductDb(db *sql.DB) *ProductDb {
 	return &ProductDb{db: db}
 }
 
-func (p *ProductDb) Get(ID string) (application.ProductInterface, error) {
+func (p *ProductDb) Get(id string) (application.ProductInterface, error) {
 	var product application.Product
-	stmt, err := p.db.Prepare("select id, name, status, price from products where id = ?")
+	stmt, err := p.db.Prepare("select id, name, price, status from products where id=?")
 	if err != nil {
 		return nil, err
 	}
-	err = stmt.QueryRow(ID).Scan(&product.ID, &product.Name, &product.Status, &product.Price)
+	err = stmt.QueryRow(id).Scan(&product.ID, &product.Name, &product.Price, &product.Status)
 	if err != nil {
 		return nil, err
 	}
@@ -30,7 +30,7 @@ func (p *ProductDb) Get(ID string) (application.ProductInterface, error) {
 
 func (p *ProductDb) Save(product application.ProductInterface) (application.ProductInterface, error) {
 	var rows int
-	p.db.QueryRow("select count(id) from products where id = ?", product.GetID()).Scan(&rows)
+	p.db.QueryRow("Select count(*) from products where id=?", product.GetID()).Scan(&rows)
 	if rows == 0 {
 		_, err := p.create(product)
 		if err != nil {
@@ -46,11 +46,16 @@ func (p *ProductDb) Save(product application.ProductInterface) (application.Prod
 }
 
 func (p *ProductDb) create(product application.ProductInterface) (application.ProductInterface, error) {
-	stmt, err := p.db.Prepare("insert into products(id, name, status, price) values(?,?,?,?)")
+	stmt, err := p.db.Prepare(`insert into products(id, name, price, status) values(?,?,?,?)`)
 	if err != nil {
 		return nil, err
 	}
-	_, err = stmt.Exec(product.GetID(), product.GetName(), product.GetStatus(), product.GetPrice())
+	_, err = stmt.Exec(
+		product.GetID(),
+		product.GetName(),
+		product.GetPrice(),
+		product.GetStatus(),
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -62,15 +67,8 @@ func (p *ProductDb) create(product application.ProductInterface) (application.Pr
 }
 
 func (p *ProductDb) update(product application.ProductInterface) (application.ProductInterface, error) {
-	stmt, err := p.db.Prepare("update products set name = ?, status = ?, price = ? where id = ?")
-	if err != nil {
-		return nil, err
-	}
-	_, err = stmt.Exec(product.GetName(), product.GetStatus(), product.GetPrice(), product.GetID())
-	if err != nil {
-		return nil, err
-	}
-	err = stmt.Close()
+	_, err := p.db.Exec("update products set name = ?, price=?, status=? where id = ?",
+		product.GetName(), product.GetPrice(), product.GetStatus(), product.GetID())
 	if err != nil {
 		return nil, err
 	}

@@ -14,34 +14,23 @@ func init() {
 type ProductInterface interface {
 	IsValid() (bool, error)
 	Enable() error
-	Disable() error	
+	Disable() error
 	GetID() string
 	GetName() string
 	GetStatus() string
 	GetPrice() float64
-}
-
-const (
-	DISABLED = "disabled"
-	ENABLED = "enabled"
-)
-
-type Product struct {
-	ID string `valid:"uuidv4"` 
-	Name string `valid:"required"`
-	Status string `valid:"required"`
-	Price float64 `valid:"float,optional"`
+	ChangePrice(price float64) error
 }
 
 type ProductServiceInterface interface {
-	Get(ID string) (ProductInterface, error)
+	Get(id string) (ProductInterface, error)
 	Create(name string, price float64) (ProductInterface, error)
-	Enable(product ProductInterface) (bool, error)
-	Disable(product ProductInterface) (bool, error)
+	Enable(product ProductInterface) (ProductInterface, error)
+	Disable(product ProductInterface) (ProductInterface, error)
 }
 
 type ProductReader interface {
-	Get(ID string) (ProductInterface, error)
+	Get(id string) (ProductInterface, error)
 }
 
 type ProductWriter interface {
@@ -53,11 +42,24 @@ type ProductPersistenceInterface interface {
 	ProductWriter
 }
 
+const (
+	DISABLED = "disabled"
+	ENABLED  = "enabled"
+)
+
+type Product struct {
+	ID     string  `valid:"uuidv4"`
+	Name   string  `valid:"required"`
+	Price  float64 `valid:"float,optional"`
+	Status string  `valid:"required"`
+}
+
 func NewProduct() *Product {
-	return &Product{
-		ID: uuid.NewV4().String(),
+	product := Product{
+		ID:     uuid.NewV4().String(),
 		Status: DISABLED,
 	}
+	return &product
 }
 
 func (p *Product) IsValid() (bool, error) {
@@ -66,18 +68,17 @@ func (p *Product) IsValid() (bool, error) {
 	}
 
 	if p.Status != ENABLED && p.Status != DISABLED {
-		return false, errors.New("The status must be enabled or disabled")
+		return false, errors.New("the status must be enabled or disabled")
 	}
 
 	if p.Price < 0 {
-		return false, errors.New("The price must be greater than zero")
+		return false, errors.New("the price must be greater or equal zero")
 	}
 
 	_, err := govalidator.ValidateStruct(p)
 	if err != nil {
 		return false, err
 	}
-
 	return true, nil
 }
 
@@ -86,7 +87,19 @@ func (p *Product) Enable() error {
 		p.Status = ENABLED
 		return nil
 	}
-	return errors.New("The price must be greater than zero to enable the product")
+	return errors.New("the price must be greater than zero to enable the product")
+}
+
+func (p *Product) ChangePrice(price float64) error {
+	if p.Price < 0 {
+		return errors.New("price only accept positive numbers")
+	}
+	p.Price = price
+	_, err := p.IsValid()
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (p *Product) Disable() error {
@@ -94,7 +107,7 @@ func (p *Product) Disable() error {
 		p.Status = DISABLED
 		return nil
 	}
-	return errors.New("The price must be zero to disable the product")
+	return errors.New("the price must be zero in order to have the product disabled")
 }
 
 func (p *Product) GetID() string {

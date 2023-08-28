@@ -2,46 +2,48 @@ package cli
 
 import (
 	"fmt"
-
-	"github.com/vinicciussantos/arquitetura-hexagonal/application"
+	"github.com/codeedu/go-hexagonal/application"
 )
 
 func Run(service application.ProductServiceInterface, action string, productId string, productName string, price float64) (string, error) {
-	var result string
-	var err error
+
+	var result = ""
+
 	switch action {
 	case "create":
 		product, err := service.Create(productName, price)
 		if err != nil {
-			return "", err
+			return result, err
 		}
-		result = fmt.Sprintf("Product ID %s with the name %s has been created with the price %f and status %s", product.GetID(), product.GetName(), product.GetPrice(), product.GetStatus())
+		result = fmt.Sprintf("Product ID %s with the name %s has been created with the price %f and status %s",
+			product.GetID(), product.GetName(), product.GetPrice(), product.GetStatus())
 	case "enable":
 		product, err := service.Get(productId)
 		if err != nil {
-			return "", err
+			return result, err
 		}
-		_, err = service.Enable(product)
+		res, err := service.Enable(product)
 		if err != nil {
-			return "", err
+			return result, err
 		}
-		result = fmt.Sprintf("Product %s has been enabled", product.GetName())
+		result = fmt.Sprintf("Product %s has been enabled.", res.GetName())
 	case "disable":
 		product, err := service.Get(productId)
 		if err != nil {
-			return "", err
+			return result, err
 		}
-		_, err = service.Disable(product)
+		res, err := service.Disable(product)
 		if err != nil {
-			return "", err
+			return result, err
 		}
-		result = fmt.Sprintf("Product %s has been disabled", product.GetName())
+		result = fmt.Sprintf("Product %s has been disabled.", res.GetName())
 	default:
-		product, err := service.Get(productId)
+		res, err := service.Get(productId)
 		if err != nil {
-			return "", err
+			return result, err
 		}
-		result = fmt.Sprintf("Product ID: %s\nName: %s\nStatus: %s\nPrice: %f", product.GetID(), product.GetName(), product.GetStatus(), product.GetPrice())
+		result = fmt.Sprintf("Product ID: %s\nName: %s\nPrice: %f\nStatus: %s",
+			res.GetID(), res.GetName(), res.GetPrice(), res.GetStatus())
 	}
-	return result, err
+	return result, nil
 }
