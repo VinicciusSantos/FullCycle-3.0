@@ -28,24 +28,24 @@ describe("Unit test list customer usecase", () => {
     expect(result).toEqual({
       customers: [
         {
+          id: customer1.id,
+          name: customer1.name,
           address: {
-            city: "00000-000",
-            number: 1,
-            street: "Rua dos Bobos",
-            zip: "São Paulo",
+            street: customer1.Address.street,
+            number: customer1.Address.number,
+            city: customer1.Address.city,
+            zip: customer1.Address.zip,
           },
-          id: "43762fdd-d5ac-4eea-a51d-ce34a727d8e9",
-          name: "John Doe",
         },
         {
+          id: customer2.id,
+          name: customer2.name,
           address: {
-            city: "00000-000",
-            number: 1,
-            street: "Avenida Paulista",
-            zip: "São Paulo",
+            street: customer2.Address.street,
+            number: customer2.Address.number,
+            city: customer2.Address.city,
+            zip: customer2.Address.zip,
           },
-          id: "ecfd117b-59ae-4b2b-84b1-2563a54de285",
-          name: "Jane Doe",
         },
       ],
     });
