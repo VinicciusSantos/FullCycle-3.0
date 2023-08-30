@@ -23,3 +23,4 @@
 8. 📅 [Event Storming na Prática](./08%20%7C%20Event%20Storming%20na%20Pr%C3%A1tica%20%F0%9F%93%85/README.md) - Envolva toda equipe de negócios e técnica, através de uma maneira colaborativa, prática e hands-on de apresentar todos os eventos do sistema.
 9. 🏗 [Arquitetura Hexagonal](./09%20%7C%20Arquitetura%20Hexagonal%20%F0%9F%8F%97/README.md) - Ports and Adapters. É possível organizar sua aplicação em camadas e responsabilidades.
 10. 💎 [Clean Architecture](./10%20|%20Clean%20Architecture%20💎/README.md) - É possível ter reusabilidade de código, coesão, independência de tecnologia e testabilidade. A arquitetura limpa é um padrão criado para isso.
+11. 📦 [Sistemas Monolíticos](./11%20|%20Sistemas%20Monolíticos%20📦/README.md) - Sistemas monolíticos podem não ser tão ruins, desde que criados de maneira correta, coesa e obedecendo alguns padrão importantes na criação do seu projeto.
