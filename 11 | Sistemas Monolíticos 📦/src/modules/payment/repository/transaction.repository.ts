@@ -7,7 +7,7 @@ import TransactionModel from "./transaction.model";
 export default class TransactionRepostiory implements PaymentGateway {
   async save(input: transaction): Promise<transaction> {
     await TransactionModel.create({
-      id: input.id.id,
+      id: new Id(input?.id?.id).id,
       orderId: input.orderId,
       amount: input.amount,
       status: input.status,
