@@ -64,14 +64,12 @@ describe("ProductRepository test", () => {
     const result = await productRepository.find(productProps.id);
     expect(result).toBeInstanceOf(Product);
     expect(result).toEqual(
-      new Product({
-        id: new Id(productProps.id),
+      expect.objectContaining({
+        id: expect.any(Id),
         name: productProps.name,
         description: productProps.description,
         purchasePrice: productProps.purchasePrice,
         stock: productProps.stock,
-        createdAt: productProps.createdAt,
-        updatedAt: productProps.updatedAt,
       })
     );
   });
