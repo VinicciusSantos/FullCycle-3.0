@@ -45,7 +45,6 @@ describe("InvoiceFacade", () => {
 
     expect(response.id).toBeDefined();
     expect(response.name).toEqual(input.name);
-    expect(response.document).toEqual(input.document);
     expect(response.address).toEqual(input.address);
     expect(response.items.length).toEqual(input.items.length);
     expect(response.items[0].name).toEqual(input.items[0].name);
