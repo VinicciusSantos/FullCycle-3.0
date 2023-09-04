@@ -27,3 +27,4 @@
 10. 💎 [Clean Architecture](./10%20|%20Clean%20Architecture%20💎/README.md) - É possível ter reusabilidade de código, coesão, independência de tecnologia e testabilidade. A arquitetura limpa é um padrão criado para isso.
 11. 📦 [Sistemas Monolíticos](./11%20|%20Sistemas%20Monolíticos%20📦/README.md) - Sistemas monolíticos podem não ser tão ruins, desde que criados de maneira correta, coesa e obedecendo alguns padrão importantes na criação do seu projeto.
 12. 🔬 [Arquitetura baseada em microsserviços](./12%20|%20Arquitetura%20baseada%20em%20microsserviços%20🔬/README.MD) - Os microsserviços permitem que um aplicativo grande seja separado em partes independentes menores, com cada parte tendo sua própria responsabilidade e autonomia de desenvolvimento.
+13. ✉️ [EDA - Event Driven Architecture](./13%20|%20EDA%20-%20Event%20Driven%20Architecture%20✉️/README.md) - Comunicação assíncrona com baixo acoplamento. Uma solução para a comunicação entre microserviços.
