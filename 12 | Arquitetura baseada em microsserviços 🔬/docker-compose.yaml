@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  plantUML:
+    image: plantuml/plantuml-server:jetty
+    ports:
+      - "8080:8080"
+    container_name: plantUML

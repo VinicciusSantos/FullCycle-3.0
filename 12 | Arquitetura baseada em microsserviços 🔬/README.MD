@@ -133,3 +133,22 @@
 - **Padronização de logs**
 - **Open telemetry:** é um projeto de código aberto que fornece uma estrutura para instrumentação e observabilidade em aplicativos e sistemas distribuídos. Ele permite a coleta de métricas, rastreamento e registros para monitorar e solucionar problemas em ambientes complexos. O OpenTelemetry é amplamente adotado para melhorar a visibilidade e o desempenho em sistemas modernos baseados em microsserviços e contêineres.
 
+## C4 Model
+
+O **C4 Model** é uma abordagem de modelagem de arquitetura de software que fornece uma maneira clara e consistente de representar a arquitetura de um sistema, tornando-a mais fácil de comunicar e compreender.
+
+### Níveis de Abstração
+
+O C4 Model é composto por quatro níveis de abstração:
+
+1. **Contexto (Context Diagram):** Representa o sistema como um todo e seus principais relacionamentos com partes externas, como usuários e sistemas externos.
+2. **Contêineres (Container Diagram):** Detalha os principais contêineres ou componentes de alto nível que compõem o sistema e suas interações.
+3. **Componentes (Component Diagram):** Mostra a estrutura interna dos contêineres, descrevendo os componentes e como eles se relacionam.
+4. **Código (Code Diagram):** Este nível é opcional e representa detalhes de implementação, como classes e módulos dentro dos componentes.
+
+### Benefícios
+
+- **Comunicação Clara**: Facilita a comunicação entre equipes e partes interessadas, usando diagramas simples e eficazes.
+- **Foco na Arquitetura**: Ajuda a manter o foco nas decisões de arquitetura em vez de detalhes de implementação.
+- **Documentação Dinâmica**: Os diagramas são fáceis de manter e podem ser gerados automaticamente.
+- **Visão Hierárquica**: Proporciona uma visão hierárquica da arquitetura, do contexto geral aos detalhes de implementação.
