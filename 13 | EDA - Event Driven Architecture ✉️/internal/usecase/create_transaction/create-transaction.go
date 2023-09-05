@@ -1,29 +1,39 @@
-package createtransaction
+package create_transaction
 
 import (
 	"micro-wallet/internal/entity"
 	"micro-wallet/internal/gateway"
+	"micro-wallet/pkg/events"
 )
 
 type CreateTransactionInputDto struct {
-	AccountIDFrom string
-	AccountIDTo   string
-	Amount        float64
+	AccountIDFrom string `json:"account_id_from"`
+	AccountIDTo   string `json:"account_id_to"`
+	Amount        float64 `json:"amount"`
 }
 
 type CreateTransactionOutputDto struct {
-	ID            string
+	ID string `json:"id"`
 }
 
 type CreateTransactionUseCase struct {
 	transactionGateway gateway.TransactionGateway
 	accountGateway     gateway.AccountGateway
+	eventDispatcher    events.EventDispatcherInterface
+	transactionCreated events.EventInterface
 }
 
-func NewCreateTransactionUseCase(transactionGateway gateway.TransactionGateway, accountGateway gateway.AccountGateway) *CreateTransactionUseCase {
+func NewCreateTransactionUseCase(
+	transactionGateway gateway.TransactionGateway,
+	accountGateway gateway.AccountGateway,
+	eventDispatcher events.EventDispatcherInterface,
+	transactionCreated events.EventInterface,
+) *CreateTransactionUseCase {
 	return &CreateTransactionUseCase{
 		transactionGateway: transactionGateway,
 		accountGateway:     accountGateway,
+		eventDispatcher:    eventDispatcher,
+		transactionCreated: transactionCreated,
 	}
 }
 
@@ -40,11 +50,28 @@ func (uc *CreateTransactionUseCase) Execute(inputDto *CreateTransactionInputDto)
 	if err != nil {
 		return nil, err
 	}
+
+	err = uc.accountGateway.UpdateBalance(accountFrom)
+	if err != nil {
+		return nil, err
+	}
+
+	err = uc.accountGateway.UpdateBalance(accountTo)
+	if err != nil {
+		return nil, err
+	}
+
 	err = uc.transactionGateway.Create(transaction)
 	if err != nil {
 		return nil, err
 	}
-	return &CreateTransactionOutputDto{
+
+	output := &CreateTransactionOutputDto{
 		ID: transaction.ID,
-	}, nil
+	}
+
+	uc.transactionCreated.SetPayload(output)
+	uc.eventDispatcher.Dispatch(uc.transactionCreated)
+
+	return output, nil
 }

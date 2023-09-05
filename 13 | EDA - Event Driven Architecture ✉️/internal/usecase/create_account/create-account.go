@@ -1,4 +1,4 @@
-package createaccount
+package create_account
 
 import (
 	"micro-wallet/internal/entity"
@@ -6,7 +6,7 @@ import (
 )
 
 type CreateAccountInputDto struct {
-	ClientID string
+	ClientID string `json:"client_id"`
 }
 
 type CreateAccountOutputDto struct {
@@ -18,10 +18,10 @@ type CreateAccountUseCase struct {
 	clientGateway  gateway.ClientGateway
 }
 
-func NewCreateAccountUseCase(accountGateway gateway.AccountGateway, clientGateway gateway.ClientGateway) *CreateAccountUseCase {
+func NewCreateAccountUseCase(a gateway.AccountGateway, c gateway.ClientGateway) *CreateAccountUseCase {
 	return &CreateAccountUseCase{
-		accountGateway: accountGateway,
-		clientGateway:  clientGateway,
+		accountGateway: a,
+		clientGateway:  c,
 	}
 }
 

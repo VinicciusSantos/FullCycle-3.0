@@ -19,7 +19,7 @@ func (s *AccountDbTestSuite) SetupSuite() {
 	db, err := sql.Open("sqlite3", ":memory:")
 	s.Nil(err)
 	s.db = db
-	db.Exec("CREATE TABLE clients (id string, name string, email string, created_at date, updated_at date)")
+	db.Exec("CREATE TABLE clients (id string, name string, email string, created_at date)")
 	db.Exec("CREATE TABLE accounts (id string, client_id string, balance string, created_at date)")
 	s.clientDB = NewClientDB(db)
 	s.client, _ = entity.NewClient("John Doe", "j@a.com")
@@ -43,12 +43,12 @@ func (s *AccountDbTestSuite) TestSave() {
 }
 
 func (s *AccountDbTestSuite) TestFindById() {
-	s.db.Exec("INSERT INTO clients(id, name, email, created_at, updated_at) VALUES(?,?,?,?,?)", s.client.ID, s.client.Name, s.client.Email, s.client.CreatedAt, s.client.UpdatedAt)
+	s.db.Exec("INSERT INTO clients(id, name, email, created_at) VALUES(?,?,?,?,?)", s.client.ID, s.client.Name, s.client.Email, s.client.CreatedAt)
 
 	account := entity.NewAccount(s.client)
 	accountDB := NewAccountDB(s.db)
 	accountDB.Save(account)
-	accountFromDB, err := accountDB.FindById(account.ID)
+	accountFromDB, err := accountDB.FindByID(account.ID)
 	s.Nil(err)
 	s.Equal(account.ID, accountFromDB.ID)
 	s.Equal(account.Client.ID, accountFromDB.Client.ID)

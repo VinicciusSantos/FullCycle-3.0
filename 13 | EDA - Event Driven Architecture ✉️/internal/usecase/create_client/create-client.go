@@ -1,4 +1,4 @@
-package createclient
+package create_client
 
 import (
 	"micro-wallet/internal/entity"
@@ -43,7 +43,6 @@ func (uc *CreateClientUseCase) Execute(inputDto *CreateClientInputDto) (*CreateC
 		Name:      client.Name,
 		Email:     client.Email,
 		CreatedAt: client.CreatedAt,
-		UpdatedAt: client.UpdatedAt,
 	}
 	return outputDto, nil
 }

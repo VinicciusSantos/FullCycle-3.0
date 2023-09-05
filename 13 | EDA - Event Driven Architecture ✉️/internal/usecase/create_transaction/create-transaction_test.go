@@ -1,7 +1,9 @@
-package createtransaction
+package create_transaction
 
 import (
 	"micro-wallet/internal/entity"
+	"micro-wallet/internal/event"
+	"micro-wallet/pkg/events"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -20,6 +22,11 @@ func (m *AccountGatewayMock) Save(account *entity.Account) error {
 func (m *AccountGatewayMock) FindByID(id string) (*entity.Account, error) {
 	args := m.Called(id)
 	return args.Get(0).(*entity.Account), args.Error(1)
+}
+
+func (m *AccountGatewayMock) UpdateBalance(account *entity.Account) error {
+	args := m.Called(account)
+	return args.Error(0)
 }
 
 type TransactionGatewayMock struct {
@@ -53,7 +60,9 @@ func TestCreateTransactionUsecase(t *testing.T) {
 		Amount:        100,
 	}
 
-	uc := NewCreateTransactionUseCase(mockTransaction, mockAccount)
+	dispatcher := events.NewEventDispatcher()
+	event := event.NewTransactionCreated()
+	uc := NewCreateTransactionUseCase(mockTransaction, mockAccount, dispatcher, event)
 	outputDTO, err := uc.Execute(inputDTO)
 	assert.Nil(t, err)
 	assert.NotNil(t, outputDTO)

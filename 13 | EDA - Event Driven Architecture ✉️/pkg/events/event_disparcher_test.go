@@ -26,6 +26,10 @@ func (e *TestEvent) GetDateTime() time.Time {
 	return time.Now()
 }
 
+func (e *TestEvent) SetPayload(payload interface{}) {
+	e.Payload = payload
+}
+
 type TestEventHandler struct {
 	ID int
 }
@@ -91,20 +95,18 @@ func (suite *EventDispatcherTestSuite) TestEventDispatcher_Clear() {
 }
 
 func (suite *EventDispatcherTestSuite) TestEventDispatcher_Has() {
-	err := suite.eventDispatcher.Register(suite.event.name, &suite.handler)
+	// Event 1
+	err := suite.eventDispatcher.Register(suite.event.GetName(), &suite.handler)
 	suite.Nil(err)
-	suite.Equal(1, len(suite.eventDispatcher.handlers[suite.event.name]))
+	suite.Equal(1, len(suite.eventDispatcher.handlers[suite.event.GetName()]))
 
-	err = suite.eventDispatcher.Register(suite.event2.name, &suite.handler2)
+	err = suite.eventDispatcher.Register(suite.event.GetName(), &suite.handler2)
 	suite.Nil(err)
-	suite.Equal(1, len(suite.eventDispatcher.handlers[suite.event2.name]))
+	suite.Equal(2, len(suite.eventDispatcher.handlers[suite.event.GetName()]))
 
-	has := suite.eventDispatcher.Has(&suite.event, &suite.handler)
-	suite.True(has)
-	has = suite.eventDispatcher.Has(&suite.event2, &suite.handler2)
-	suite.True(has)
-	has = suite.eventDispatcher.Has(&suite.event, &suite.handler2)
-	suite.False(has)
+	assert.True(suite.T(), suite.eventDispatcher.Has(suite.event.GetName(), &suite.handler))
+	assert.True(suite.T(), suite.eventDispatcher.Has(suite.event.GetName(), &suite.handler2))
+	assert.False(suite.T(), suite.eventDispatcher.Has(suite.event.GetName(), &suite.handler3))
 }
 
 type MockHandler struct {
