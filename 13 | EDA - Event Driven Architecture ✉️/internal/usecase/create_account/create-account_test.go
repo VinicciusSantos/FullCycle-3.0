@@ -59,7 +59,6 @@ func TestCreateAccount(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, outputDto)
 	assert.NotEmpty(t, outputDto.ID)
-	assert.Equal(t, inputDto.ClientID, outputDto.ID)
 	mc.AssertExpectations(t)
 	mc.AssertNumberOfCalls(t, "Get", 1)
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"micro-wallet/internal/database"
@@ -29,6 +30,9 @@ func main() {
 	clientDb := database.NewClientDB(db)
 	accountDb := database.NewAccountDB(db)
 	transactionDb := database.NewTransactionDB(db)
+
+	ctx := context.Background()
+	uow := 
 
 	createClientUsecase := create_client.NewCreateClientUseCase(clientDb)
 	createAccountUsecase := create_account.NewCreateAccountUseCase(accountDb, clientDb)
