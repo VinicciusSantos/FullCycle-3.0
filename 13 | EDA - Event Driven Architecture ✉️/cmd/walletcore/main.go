@@ -12,12 +12,14 @@ import (
 	"micro-wallet/internal/web"
 	"micro-wallet/internal/web/webserver"
 	"micro-wallet/pkg/events"
+	"micro-wallet/pkg/uow"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
+
 func main() {
-	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", "root", "root", "localhost", "3306", "wallet"))
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", "root", "root", "mysql", "3306", "wallet"))
 	if err != nil {
 		panic(err)
 	}
@@ -25,27 +27,34 @@ func main() {
 
 	eventDispatcher := events.NewEventDispatcher()
 	transactionCreatedEvent := event.NewTransactionCreated()
-	// eventDispatcher.Register("transaction.created", handler)
 
 	clientDb := database.NewClientDB(db)
 	accountDb := database.NewAccountDB(db)
-	transactionDb := database.NewTransactionDB(db)
 
 	ctx := context.Background()
-	uow := 
+	uow := uow.NewUow(ctx, db)
 
-	createClientUsecase := create_client.NewCreateClientUseCase(clientDb)
-	createAccountUsecase := create_account.NewCreateAccountUseCase(accountDb, clientDb)
-	createTransactionUsecase := create_transaction.NewCreateTransactionUseCase(transactionDb, accountDb, eventDispatcher, transactionCreatedEvent)
+	uow.Register("AccountDB", func(tx *sql.Tx) interface{} {
+		return database.NewAccountDB(db)
+	})
 
-	webServer := webserver.NewWebServer(":3000")
-	clientHandler := web.NewWebClientHandler(*createClientUsecase)
-	accountHandler := web.NewWebAccountHandler(*createAccountUsecase)
-	transactionHandler := web.NewWebTransactionHandler(*createTransactionUsecase)
+	uow.Register("TransactionDB", func(tx *sql.Tx) interface{} {
+		return database.NewTransactionDB(db)
+	})
+	createTransactionUseCase := create_transaction.NewCreateTransactionUseCase(uow, eventDispatcher, transactionCreatedEvent)
+	createClientUseCase := create_client.NewCreateClientUseCase(clientDb)
+	createAccountUseCase := create_account.NewCreateAccountUseCase(accountDb, clientDb)
 
-	webServer.AddHandler("/clients", clientHandler.CreateClient)
-	webServer.AddHandler("/accounts", accountHandler.CreateAccount)
-	webServer.AddHandler("/transactions", transactionHandler.CreateTransaction)
+	webserver := webserver.NewWebServer(":8080")
 
-	webServer.Start()
+	clientHandler := web.NewWebClientHandler(*createClientUseCase)
+	accountHandler := web.NewWebAccountHandler(*createAccountUseCase)
+	transactionHandler := web.NewWebTransactionHandler(*createTransactionUseCase)
+
+	webserver.AddHandler("/clients", clientHandler.CreateClient)
+	webserver.AddHandler("/accounts", accountHandler.CreateAccount)
+	webserver.AddHandler("/transactions", transactionHandler.CreateTransaction)
+
+	fmt.Println("Server is running")
+	webserver.Start()
 }

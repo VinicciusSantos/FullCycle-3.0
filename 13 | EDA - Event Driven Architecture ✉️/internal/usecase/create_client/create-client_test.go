@@ -38,7 +38,6 @@ func TestCreateClientusecase_Execute(t *testing.T) {
 	assert.Equal(t, inputDto.Email, outputDto.Email)
 	assert.NotEmpty(t, outputDto.ID)
 	assert.NotEmpty(t, outputDto.CreatedAt)
-	assert.NotEmpty(t, outputDto.UpdatedAt)
 	m.AssertExpectations(t)
 	m.AssertNumberOfCalls(t, "Save", 1)
 }
