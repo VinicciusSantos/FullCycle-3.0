@@ -28,3 +28,4 @@
 11. 📦 [Sistemas Monolíticos](./11%20|%20Sistemas%20Monolíticos%20📦/README.md) - Sistemas monolíticos podem não ser tão ruins, desde que criados de maneira correta, coesa e obedecendo alguns padrão importantes na criação do seu projeto.
 12. 🔬 [Arquitetura baseada em microsserviços](./12%20|%20Arquitetura%20baseada%20em%20microsserviços%20🔬/README.MD) - Os microsserviços permitem que um aplicativo grande seja separado em partes independentes menores, com cada parte tendo sua própria responsabilidade e autonomia de desenvolvimento.
 13. ✉️ [EDA - Event Driven Architecture](./13%20|%20EDA%20-%20Event%20Driven%20Architecture%20✉️/README.md) - Comunicação assíncrona com baixo acoplamento. Uma solução para a comunicação entre microserviços.
+14. 🦍 [API Gateway](./14%20|%20API%20Gateway%20🦍/README.md) - Um único ponto de entrada, transparência e segurança. Esse são os principais benefícios ao utilizar uma API Gateway em seu projeto.
