@@ -12,11 +12,13 @@ import (
 	"micro-wallet/internal/web"
 	"micro-wallet/internal/web/webserver"
 	"micro-wallet/pkg/events"
+	"micro-wallet/pkg/events/handler"
+	"micro-wallet/pkg/kafka"
 	"micro-wallet/pkg/uow"
 
+	ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
 	_ "github.com/go-sql-driver/mysql"
 )
-
 
 func main() {
 	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", "root", "root", "mysql", "3306", "wallet"))
@@ -25,7 +27,13 @@ func main() {
 	}
 	defer db.Close()
 
+	configMap := ckafka.ConfigMap{
+		"bootstrap.servers": "kafka:9094",
+	}
+	kafkaProducer := kafka.NewKafkaProducer(&configMap)
+
 	eventDispatcher := events.NewEventDispatcher()
+	eventDispatcher.Register("TransactionCreated", handler.NewTransactionCreatedKafkaHandler(kafkaProducer))
 	transactionCreatedEvent := event.NewTransactionCreated()
 
 	clientDb := database.NewClientDB(db)
@@ -55,6 +63,5 @@ func main() {
 	webserver.AddHandler("/accounts", accountHandler.CreateAccount)
 	webserver.AddHandler("/transactions", transactionHandler.CreateTransaction)
 
-	fmt.Println("Server is running")
 	webserver.Start()
 }
