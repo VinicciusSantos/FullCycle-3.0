@@ -30,12 +30,15 @@
 - Tipos comuns de exchanges incluem `direct`, `topic`, e `fanout`.
 
 ### Direct Exchange
+
 ![Direct exchange](./assets/direct_exchange.png)
 
 ## Fanout Exchange
+
 ![Fanout Exchange](./assets/fanout_exchange.png)
 
 ## Topic Exchange
+
 ![Topic Exchange](./assets/topic_exchange.png)
 
 ## Casos de Uso
@@ -43,3 +46,29 @@
 - Processamento de tarefas em segundo plano.
 - Comunicação entre microserviços.
 - Integração de sistemas heterogêneos.
+
+## Queues
+
+- **FIFO** - First In, First Out
+- **Propriedades**:
+  - **Durable**: Se ela deve ser salva mesmo depois do restart do broker
+  - **Auto-delete**: Removida automaticamente quando o consumer se desconecta
+  - **Expiry**: Define o tempo que há mensagens ou clientes consumindo
+  - **Message TTL**: Tempo de vida da mensagem
+  - **Overflow**:
+    - Drop Head (remove a última)
+    - Reject Publish
+  - **Exclusive**: Somente channel que criou pode acessar
+  - **Max Lenght** ou **bytes**: Quantidade de mensagens ou tamanho de bytes máximos permitidos
+
+## Dead Letter queues
+
+- Algumas mensagens não conseguem ser entregues por qualquer motivo
+- São encaminhadas para uma exchange específica que roteia as mensagens para uma dead letter queue
+- Tais mensagens podem ser consumidas e averiguadas posteriormente
+
+## Lazy Queues
+
+- Mensagens são armazenadas em disco
+- Existe alto I/O
+- Quando há milhões de mensagens em uma fila, por qualquer motivo, há a possibilidade de liberar a memória, jogando especificamente as mensagens da fila em questão em disco
