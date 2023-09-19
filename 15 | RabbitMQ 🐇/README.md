@@ -72,3 +72,17 @@
 - Mensagens são armazenadas em disco
 - Existe alto I/O
 - Quando há milhões de mensagens em uma fila, por qualquer motivo, há a possibilidade de liberar a memória, jogando especificamente as mensagens da fila em questão em disco
+
+## Confiabilidade
+
+- Garantir que mensagens não serão perdidas
+
+### Consumer acknowledgement
+
+- **Basic. Ack**: o con-sumidor confirma que conseguiu processar a mensagem
+- **Basic. Reject**: o consumidor diz que ocorreu um erro, então a mensagem deve continuar na fila
+- **Basic. Nack**: o consumidor pode rejeitar várias mensagens de uma vez
+
+### Publisher confirm
+
+Ocorre no início do processo para confirmar se o rabbitMQ recebeu a mensagem
