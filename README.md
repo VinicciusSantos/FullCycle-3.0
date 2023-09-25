@@ -13,6 +13,7 @@
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 ![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)
 ![RabbitMQ](https://img.shields.io/badge/Rabbitmq-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white)
+![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-000?style=for-the-badge&logo=apachekafka)
 
 ## 🌟 Menu Principal 🌟
 
@@ -31,3 +32,5 @@
 13. ✉️ [EDA - Event Driven Architecture](./13%20|%20EDA%20-%20Event%20Driven%20Architecture%20✉️/README.md) - Comunicação assíncrona com baixo acoplamento. Uma solução para a comunicação entre microserviços.
 14. 🦍 [API Gateway](./14%20|%20API%20Gateway%20🦍/README.md) - Um único ponto de entrada, transparência e segurança. Esse são os principais benefícios ao utilizar uma API Gateway em seu projeto.
 15. 🐇 [RabbitMQ](./15%20|%20RabbitMQ%20🐇/README.md) - RabbitMQ é um dos sistemas de mensageria mais conhecidos, com intuito de facilitar a comunicação assíncrona de dados entre processos.
+16. 📡 [Apache Kafka](./16%20|%20Apache%20Kafka%20📡/README.md) - Veloz, escalavel e versátil. Apache Kafka é mais uma ferramenta de mensagaria porém com foco em grandes streams de dados e tempo real.
+ 
