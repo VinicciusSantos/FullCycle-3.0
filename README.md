@@ -33,4 +33,4 @@
 14. 🦍 [API Gateway](./14%20|%20API%20Gateway%20🦍/README.md) - Um único ponto de entrada, transparência e segurança. Esse são os principais benefícios ao utilizar uma API Gateway em seu projeto.
 15. 🐇 [RabbitMQ](./15%20|%20RabbitMQ%20🐇/README.md) - RabbitMQ é um dos sistemas de mensageria mais conhecidos, com intuito de facilitar a comunicação assíncrona de dados entre processos.
 16. 📡 [Apache Kafka](./16%20|%20Apache%20Kafka%20📡/README.md) - Veloz, escalavel e versátil. Apache Kafka é mais uma ferramenta de mensagaria porém com foco em grandes streams de dados e tempo real.
- 
+17. 🔐 [Autenticação e Keycloak](./17%20|%20Autenticação%20e%20Keycloak%20🔐/README.md) - Autenticação e autorização se tornam fáceis ao utilizar o Keycloak. Através do SSO, é possível dar acesso a múltiplos serviços sem necessidade de reautenticação.
