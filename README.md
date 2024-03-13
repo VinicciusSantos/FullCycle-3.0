@@ -34,3 +34,4 @@
 15. 🐇 [RabbitMQ](./15%20|%20RabbitMQ%20🐇/README.md) - RabbitMQ é um dos sistemas de mensageria mais conhecidos, com intuito de facilitar a comunicação assíncrona de dados entre processos.
 16. 📡 [Apache Kafka](./16%20|%20Apache%20Kafka%20📡/README.md) - Veloz, escalavel e versátil. Apache Kafka é mais uma ferramenta de mensagaria porém com foco em grandes streams de dados e tempo real.
 17. 🔐 [Autenticação e Keycloak](./17%20|%20Autenticação%20e%20Keycloak%20🔐/README.md) - Autenticação e autorização se tornam fáceis ao utilizar o Keycloak. Através do SSO, é possível dar acesso a múltiplos serviços sem necessidade de reautenticação.
+18. 🎬 [Arquitetura do projeto prático - Codeflix](./18%20|%20Arquitetura%20do%20projeto%20prático%20-%20Codeflix%20🎬/README.md) - Entenda como irá funcionar toda arquitetura do projeto CodeFlix. O que podemos utilizar, como funciona o diagrama C4 e o que esparemos de resultado..
